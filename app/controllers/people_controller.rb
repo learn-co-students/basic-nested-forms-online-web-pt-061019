@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   def new
     @person = Person.new
+    @person.addresses.build(address_type: "work" )
+    @person.addresses.build(address_type: "home" )
   end
 
   def create    
@@ -15,6 +17,6 @@ class PeopleController < ApplicationController
   private
 
   def person_params
-    params.require(:person).permit(:name)
+    params.require(:person).permit(:name, addresses_attributes: [:street_adress_1, :street_adress_2, :city, :state, :zipcode, :adresse_type])
   end
 end
